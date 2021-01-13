@@ -1,0 +1,12 @@
+<?php
+/**
+ * @var \Test\Get\Block\HelloWorld $block
+ */
+$id = 730;
+$sku = 'MT12';
+$_product = $block->getProductById($id);
+$_product = $block->getProductBySku($sku);
+echo $_product->getEntityId();
+echo '<br />';
+echo $_product->getName();
+
