@@ -1,12 +1,18 @@
 <?php
-/**
- * @var \Test\Get\Block\HelloWorld $block
- */
-$id = 730;
-$sku = 'MT12';
-$_product = $block->getProductById($id);
-$_product = $block->getProductBySku($sku);
-echo $_product->getEntityId();
-echo '<br />';
-echo $_product->getName();
+$myBlock = \Magento\Framework\App\ObjectManager::getInstance()->get('Test\Get\Block\HelloWorld');
 
+
+// print current product data
+if ($currentProduct = $myBlock->getCurrentProduct()) {
+    echo $currentProduct->getName() . '<br />';
+    echo $currentProduct->getSku() . '<br />';
+    echo $currentProduct->getFinalPrice() . '<br />';
+    echo $currentProduct->getProductUrl() . '<br />';
+    print_r ($currentProduct->getCategoryIds()) . '<br />';
+}
+
+// print current category data
+if ($currentCategory = $myBlock->getCurrentCategory()) {
+    echo $currentCategory->getName() . '<br />';
+    echo $currentCategory->getUrl() . '<br />';
+}

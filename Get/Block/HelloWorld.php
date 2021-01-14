@@ -1,27 +1,35 @@
 <?php
+
 namespace Test\Get\Block;
+
 class HelloWorld extends \Magento\Framework\View\Element\Template
 {
-    protected $_productRepository;
+    protected $_registry;
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Magento\Catalog\Model\ProductRepository $productRepository,
+        \Magento\Framework\Registry $registry,
         array $data = []
     )
     {
-        $this->_productRepository = $productRepository;
+        $this->_registry = $registry;
         parent::__construct($context, $data);
     }
 
-    public function getProductById($id)
+    public function _prepareLayout()
     {
-        return $this->_productRepository->getById($id);
+        return parent::_prepareLayout();
     }
 
-    public function getProductBySku($sku)
+    public function getCurrentCategory()
     {
-        return $this->_productRepository->get($sku);
+        return $this->_registry->registry('current_category');
     }
+
+    public function getCurrentProduct()
+    {
+        return $this->_registry->registry('current_product');
+    }
+
 }
 ?>
