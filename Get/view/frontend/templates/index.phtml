@@ -1,16 +1,38 @@
 <?php
-/**
- * @var \Test\Get\Block\HelloWorld $block
- */
-$productId = 15; // YOUR PRODUCT ID
-$product = $block->getProductById($productId);
 
+$myBlock = \Magento\Framework\App\ObjectManager::getInstance()->get('Test\Get\Block\HelloWorld');
 
-$categoryIds = $product->getCategoryIds();
+$currentProduct = $myBlock->getCurrentProduct();
 
-$categories = $block->getCategoryCollection()
-    ->addAttributeToFilter('entity_id', $categoryIds);
+if ($currentProduct = $myBlock->getCurrentProduct()) {
+    $relatedProducts = $currentProduct->getRelatedProducts();
 
-foreach ($categories as $category) {
-    echo $category->getName() . '<br>';
+    if (!empty($relatedProducts)) {
+        echo 'Related Products <br />';
+        foreach ($relatedProducts as $relatedProduct) {
+            echo $relatedProduct->getSku() . '<br />';
+            echo $relatedProduct->getName(); //get name
+            echo $relatedProduct->getPrice(); //get price
+            #print_r($relatedProduct->getData()); //Show all attributes
+        }
+    }
+
+    $upSellProducts = $currentProduct->getUpSellProducts();
+
+    if (!empty($upSellProducts)) {
+        echo '<h3>UpSell Products</h3>';
+        foreach ($upSellProducts as $upSellProduct) {
+            echo $upSellProduct->getSku() . '<br />';
+        }
+    }
+
+    $crossSellProducts = $currentProduct->getCrossSellProducts();
+
+    if (!empty($crossSellProduct)) {
+        echo 'CrossSell Products <br />';
+        foreach ($crossSellProducts as $crossSellProduct) {
+            echo $crossSellProduct->getSku() . '<br />';
+        }
+    }
+
 }
