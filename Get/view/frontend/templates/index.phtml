@@ -2,15 +2,11 @@
 /**
  * @var \Test\Get\Block\HelloWorld $block
  */
-
-$productId = 15;
-$product = $block->getProductById($productId);
-
-$categoryIds = $product->getCategoryIds();
-
-$categories = $block->getCategoryCollection()
-    ->addAttributeToFilter('entity_id', $categoryIds);
-
-foreach ($categories as $category) {
-    echo $category->getName() . '<br>';
-}
+$id = 15;
+$_productStock = $block->getStockItem($id);
+//print_r($_productStock->getData());
+echo 'quantity - ' . $_productStock->getQty(); echo '<br />';
+echo 'min quantity - ' . $_productStock->getMinQty(); echo '<br />';
+echo 'min sale quantity - ' . $_productStock->getMinSaleQty(); echo '<br />';
+echo 'max sale quantity - ' . $_productStock->getMaxSaleQty(); echo '<br />';
+echo 'is in stock - ' . $_productStock->getIsInStock(); echo '<br />';
