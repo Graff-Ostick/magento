@@ -21,13 +21,15 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
         return parent::_prepareLayout();
     }
 
+    public function getCurrentCategory()
+    {
+        return $this->_registry->registry('current_category');
+    }
+
     public function getCurrentProduct()
     {
         return $this->_registry->registry('current_product');
     }
 
-
 }
-
-
 ?>
