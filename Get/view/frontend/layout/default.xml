@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceShemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block
+                name="product.info.main.test_get_product_block"
+                class="Test\Get\Block\HelloWorld"
+                template="Test_Get::index.phtml"
+                after="page.main.title">
+            </block>
+        </referenceContainer>
+    </body>
+</page>
