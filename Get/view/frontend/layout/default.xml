@@ -9,6 +9,7 @@
                 class="Test\Get\Block\HelloWorld"
                 template="Test_Get::index.phtml"
                 after="page.main.title">
+
             </block>
         </referenceContainer>
     </body>

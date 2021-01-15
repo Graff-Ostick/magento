@@ -26,5 +26,8 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
         return $this->_registry->registry('current_product');
     }
 
+
 }
+
+
 ?>
