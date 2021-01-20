@@ -2,59 +2,19 @@
 namespace Test\Get\Block;
 class HelloWorld extends \Magento\Framework\View\Element\Template
 {
-    protected $_categoryCollectionFactory;
     protected $_productRepository;
-    protected $_registry;
+    protected $_productImageHelper;
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Catalog\Model\ProductRepository $productRepository,
-        \Magento\Framework\Registry $registry,
+        \Magento\Catalog\Helper\Image $productImageHelper,
         array $data = []
     )
     {
-        $this->_categoryCollectionFactory = $categoryCollectionFactory;
         $this->_productRepository = $productRepository;
-        $this->_registry = $registry;
+        $this->_productImageHelper= $productImageHelper;
         parent::__construct($context, $data);
-    }
-
-    /**
-     * Get category collection
-     *
-     * @param bool $isActive
-     * @param bool|int $level
-     * @param bool|string $sortBy
-     * @param bool|int $pageSize
-     * @return \Magento\Catalog\Model\ResourceModel\Category\Collection or array
-     */
-    public function getCategoryCollection($isActive = true, $level = false, $sortBy = false, $pageSize = false)
-    {
-        $collection = $this->_categoryCollectionFactory->create();
-        $collection->addAttributeToSelect('*');
-
-        // select only active categories
-        if ($isActive) {
-            $collection->addIsActiveFilter();
-        }
-
-        // select categories of certain level
-        if ($level) {
-            $collection->addLevelFilter($level);
-        }
-
-        // sort categories by some value
-        if ($sortBy) {
-            $collection->addOrderField($sortBy);
-        }
-
-        // select certain number of categories
-        if ($pageSize) {
-            $collection->setPageSize($pageSize);
-        }
-
-        return $collection;
     }
 
     public function getProductById($id)
@@ -62,9 +22,29 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
         return $this->_productRepository->getById($id);
     }
 
-    public function getCurrentProduct()
+    public function getProductBySku($sku)
     {
-        return $this->_registry->registry('current_product');
+        return $this->_productRepository->get($sku);
+    }
+
+    /**
+     * Retrieve image width
+     *
+     * @return int|null
+     */
+    public function getImageOriginalWidth($product, $imageId, $attributes = [])
+    {
+        return $this->_productImageHelper->init($product, $imageId, $attributes)->getWidth();
+    }
+
+    /**
+     * Retrieve image height
+     *
+     * @return int|null
+     */
+    public function getImageOriginalHeight($product, $imageId, $attributes = [])
+    {
+        return $this->_productImageHelper->init($product, $imageId, $attributes)->getHeight();
     }
 }
 ?>

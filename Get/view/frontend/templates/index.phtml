@@ -2,17 +2,9 @@
 /**
  * @var Test\Get\Block\HelloWorld $block
  */
-$productId = 730;
-$product = $block->getProductById($productId);
-
-// for current product
-// $product = $block->getCurrentProduct();
-
-$categoryIds = $product->getCategoryIds();
-
-$categories = $block->getCategoryCollection()
-    ->addAttributeToFilter('entity_id', $categoryIds);
-
-foreach ($categories as $category) {
-    echo $category->getName() . '<br>';
-}
+$id = 730;
+$sku = 'MJ01';
+$_product = $block->getProductById($id);
+$_product = $block->getProductBySku($sku);
+echo $block->getImageOriginalWidth($_product, 'product_small_image') . '<br />';
+echo $block->getImageOriginalHeight($_product, 'product_small_image') . '<br />';
