@@ -2,9 +2,9 @@
 /**
  * @var Test\Get\Block\HelloWorld $block
  */
-$id = 730;
-$sku = 'MJ01';
-$_product = $block->getProductById($id);
+
+$sku = 'MH03-M-blue';
 $_product = $block->getProductBySku($sku);
-echo $block->getImageOriginalWidth($_product, 'product_small_image') . '<br />';
-echo $block->getImageOriginalHeight($_product, 'product_small_image') . '<br />';
+$id = $_product->getEntityId();
+echo 'parent id - ' . $block->getProductData($id) . '<br>';
+echo 'product id - ' . $id . '<br>';

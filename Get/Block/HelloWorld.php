@@ -2,49 +2,29 @@
 namespace Test\Get\Block;
 class HelloWorld extends \Magento\Framework\View\Element\Template
 {
+    protected $_catalogProductTypeConfigurable;
     protected $_productRepository;
-    protected $_productImageHelper;
 
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
+        \Magento\Catalog\Block\Product\Context $context,
+        \Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable $catalogProductTypeConfigurable,
         \Magento\Catalog\Model\ProductRepository $productRepository,
-        \Magento\Catalog\Helper\Image $productImageHelper,
         array $data = []
-    )
-    {
+    ) {
+        $this->_catalogProductTypeConfigurable = $catalogProductTypeConfigurable;
         $this->_productRepository = $productRepository;
-        $this->_productImageHelper= $productImageHelper;
         parent::__construct($context, $data);
     }
-
-    public function getProductById($id)
-    {
-        return $this->_productRepository->getById($id);
+    public function getProductData($id){
+        $parentByChild = $this->_catalogProductTypeConfigurable->getParentIdsByChild($id);
+        if(isset($parentByChild[0])){
+            $id = $parentByChild[0];
+        }
+        return $id;
     }
-
     public function getProductBySku($sku)
     {
         return $this->_productRepository->get($sku);
-    }
-
-    /**
-     * Retrieve image width
-     *
-     * @return int|null
-     */
-    public function getImageOriginalWidth($product, $imageId, $attributes = [])
-    {
-        return $this->_productImageHelper->init($product, $imageId, $attributes)->getWidth();
-    }
-
-    /**
-     * Retrieve image height
-     *
-     * @return int|null
-     */
-    public function getImageOriginalHeight($product, $imageId, $attributes = [])
-    {
-        return $this->_productImageHelper->init($product, $imageId, $attributes)->getHeight();
     }
 }
 ?>
