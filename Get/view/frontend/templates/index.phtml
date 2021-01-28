@@ -3,8 +3,10 @@
  * @var Test\Get\Block\HelloWorld $block
  */
 
-$sku = 'MH03-M-blue';
-$_product = $block->getProductBySku($sku);
-$id = $_product->getEntityId();
-echo 'parent id - ' . $block->getProductData($id) . '<br>';
-echo 'product id - ' . $id . '<br>';
+
+$catalogRule = $block->getCatalogPriceRuleProductIds();
+$nameProducts = $block->getListNameProductFromRule($catalogRule);
+
+foreach ($nameProducts as $name){
+    echo $name . '<br>';
+}
