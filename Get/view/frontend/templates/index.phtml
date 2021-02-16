@@ -5,8 +5,9 @@
 
 
 $catalogRule = $block->getCatalogPriceRuleProductIds();
-$nameProducts = $block->getListNameProductFromRule($catalogRule);
 
-foreach ($nameProducts as $name){
-    echo $name . '<br>';
+echo "count =>" . count($catalogRule) . '<br>';
+
+foreach ($catalogRule as $id => $rule){
+    echo $block->getProductById($id)->getName() . " => " . $rule . "<br>";
 }
