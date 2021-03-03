@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\AddAttribute\Model\Attribute\Backend;
+namespace Test\MaterialAttribute\Model\Attribute\Backend;
 
 class Material extends \Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend
 {

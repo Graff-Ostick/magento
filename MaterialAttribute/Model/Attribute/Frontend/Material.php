@@ -1,5 +1,5 @@
 <?php
-namespace Test\AddAttribute\Model\Attribute\Frontend;
+namespace Test\MaterialAttribute\Model\Attribute\Frontend;
 
 class Material extends \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend
 {

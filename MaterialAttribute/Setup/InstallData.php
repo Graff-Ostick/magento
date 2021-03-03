@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\AddAttribute\Setup;
+namespace Test\MaterialAttribute\Setup;
 
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -42,9 +42,9 @@ class InstallData implements InstallDataInterface
                 'type' => 'varchar',
                 'label' => 'Clothing Material',
                 'input' => 'select',
-                'source' => 'Test\AddAttribute\Model\Attribute\Source\Material',
-                'frontend' => 'Test\AddAttribute\Model\Attribute\Frontend\Material',
-                'backend' => 'Test\AddAttribute\Model\Attribute\Backend\Material',
+                'source' => 'Test\MaterialAttribute\Model\Attribute\Source\Material',
+                'frontend' => 'Test\MaterialAttribute\Model\Attribute\Frontend\Material',
+                'backend' => 'Test\MaterialAttribute\Model\Attribute\Backend\Material',
                 'required' => false,
                 'sort_order' => 50,
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,

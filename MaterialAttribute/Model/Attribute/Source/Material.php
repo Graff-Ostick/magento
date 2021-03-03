@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\AddAttribute\Model\Attribute\Source;
+namespace Test\MaterialAttribute\Model\Attribute\Source;
 
 class Material extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
 {
