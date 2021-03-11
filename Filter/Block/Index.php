@@ -1,5 +1,8 @@
 <?php
 namespace Test\Filter\Block;
+use Magento\Backend\Block\Widget\Grid\Column\Renderer\Price;
+use Magento\Catalog\Api\Data\ProductInterface;
+
 class Index extends \Magento\Framework\View\Element\Template
 {
     protected $_productCollectionFactory;
@@ -19,9 +22,9 @@ class Index extends \Magento\Framework\View\Element\Template
     public function getProductCollection()
     {
         $collection = $this->_productCollectionFactory->create();
-        $collection->addAttributeToSelect('*')->addFinalPrice();
-        $collection->getSelect()->where("price_index.final_price < 60");
-        $collection->addCategoriesFilter(['eq' => '23']);
+        $collection->addAttributeToSelect(['SKU', 'Name', 'Price']);
+        $collection->addCategoriesFilter(['in' => '23']);
+        $collection->addAttributeToFilter(ProductInterface::PRICE, ['lt' => 60]);
         $collection->setPageSize(10);
         return $collection;
     }
