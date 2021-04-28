@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var Test\Task\Block\Custom $block
+ */
+
+$currency = $block->getCurrencyUAH();
+$_product = $block->getProductBySku('MT12');
+$price = $_product->getFinalPrice();
+echo $currency*$price;
+
+$category_id = Magento::getModel('catalog/layer')->getCurrentCategory()->getId();
+$category = Magento::getModel('catalog/category')->load($category_id);
+$products = Magento::getModel('catalog/product')
+    ->getCollection()
+    ->addAttributeToSelect('*')
+    ->addCategoryFilter($category)
+    ->setOrder('price', 'ASC')
+    ->load();

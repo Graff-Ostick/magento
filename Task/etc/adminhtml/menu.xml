@@ -1,0 +1,18 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Test_Task::menu"
+             title="Task Page"
+             translate="title"
+             module="Test_Task"
+             sortOrder="15"
+             resource="Test_Task::menu"/>
+        <add id="Test_Task::menu_item"
+             title="Task Item"
+             module="Test_Task"
+             sortOrder="10"
+             parent="Test_Task::menu"
+             action="task/create/index"
+             resource="Test_Task::menu_item"
+        />
+    </menu>
+</config>
