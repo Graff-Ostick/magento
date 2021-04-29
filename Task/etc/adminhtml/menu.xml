@@ -6,13 +6,21 @@
              module="Test_Task"
              sortOrder="15"
              resource="Test_Task::menu"/>
-        <add id="Test_Task::menu_item"
-             title="Task Item"
+        <add id="Test_Task::task1"
+             title="First Task"
              module="Test_Task"
              sortOrder="10"
              parent="Test_Task::menu"
              action="adminhtml/system_config/edit/section/task"
-             resource="Test_Task::menu_item"
+             resource="Test_Task::task1"
+        />
+        <add id="Test_Task::task2"
+             title="Second Task"
+             module="Test_Task"
+             sortOrder="20"
+             parent="Test_Task::menu"
+             action="adminhtml/system_config/edit/section/task"
+             resource="Test_Task::task2"
         />
     </menu>
 </config>

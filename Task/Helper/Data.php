@@ -2,7 +2,7 @@
 
 namespace Test\Task\Helper;
 
-use \Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\AbstractHelper;
 
 class Data extends AbstractHelper
 {
@@ -13,6 +13,9 @@ class Data extends AbstractHelper
     const TASK_ENABLED_EURO    = 'task/general/enable_euro';
     const TASK_CURRENCY_EURO   = 'task/general/currency_euro';
 
+    const SHOW_ENDS_ENABLE = 'task/ends/enable_second_task';
+    const SHOW_ENDS_VALUE = 'task/ends/amount_product';
+
     public function __construct(
         \Magento\Framework\App\Helper\Context $context
     ) {
@@ -22,19 +25,19 @@ class Data extends AbstractHelper
     public function getEnabledCurrency($enableCurrency)
     {
         $enableUAH = $this->scopeConfig->getValue(
-            self::TASK_ENABLED_UAH ,
+            self::TASK_ENABLED_UAH,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
         $enableRUB = $this->scopeConfig->getValue(
-            self::TASK_ENABLED_RUB ,
+            self::TASK_ENABLED_RUB,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
         $enableEURO = $this->scopeConfig->getValue(
-            self::TASK_ENABLED_EURO ,
+            self::TASK_ENABLED_EURO,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
-        switch ($enableCurrency){
+        switch ($enableCurrency) {
             case 'uah':
                 return $enableUAH;
             case 'rub':
@@ -45,17 +48,14 @@ class Data extends AbstractHelper
     }
     public function getLabelCurrencyUAH()
     {
-
-        if ($this->getEnabledCurrency('uah')){
+        if ($this->getEnabledCurrency('uah')) {
             return $this->scopeConfig->getValue(
                 self::TASK_CURRENCY_UAH,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
+        } else {
+            return null;
         }
-        else{
-            return NULL;
-        }
-
     }
     public function getLabelCurrencyRUB()
     {
@@ -64,9 +64,8 @@ class Data extends AbstractHelper
                 self::TASK_CURRENCY_RUB,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
-        }
-        else{
-            return NULL;
+        } else {
+            return null;
         }
     }
     public function getLabelCurrencyEURO()
@@ -76,9 +75,27 @@ class Data extends AbstractHelper
                 self::TASK_CURRENCY_EURO,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
+        } else {
+            return null;
         }
-        else {
-            return NULL;
+    }
+
+    public function getEndsForProduct()
+    {
+        $enable = $this->scopeConfig->getValue(
+            self::SHOW_ENDS_ENABLE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        if ($enable) {
+            $ends = $this->scopeConfig->getValue(
+                self::SHOW_ENDS_VALUE,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+        } else {
+            $ends = null;
         }
+
+        return $ends;
     }
 }

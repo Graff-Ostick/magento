@@ -72,9 +72,10 @@ $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
                         </strong>
                         <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
                         <?= /* @noEscape */ $block->getProductPrice($_product) ?>
-                        <p><?= ($block->getCurrencyUAH()!= NULL) ? $productPrice = $_product->getFinalPrice() * $block->getCurrencyUAH() . ' UAH' : ''?></p>
-                        <p><?= ($block->getCurrencyRUB()!= NULL) ? $productPrice = $_product->getFinalPrice() * $block->getCurrencyRUB() . ' RUB' : ''?></p>
-                        <p><?= ($block->getCurrencyEURO()!= NULL) ? $productPrice = $_product->getFinalPrice() * $block->getCurrencyEURO() . ' EURO' : ''?></p>
+                        <p><?= ($block->getCurrencyUAH() != NULL) ? $productPrice = $_product->getFinalPrice() * $block->getCurrencyUAH() . ' UAH' : ''?></p>
+                        <p><?= ($block->getCurrencyRUB() != NULL) ? $productPrice = $_product->getFinalPrice() * $block->getCurrencyRUB() . ' RUB' : ''?></p>
+                        <p><?= ($block->getCurrencyEURO() != NULL) ? $productPrice = $_product->getFinalPrice() * $block->getCurrencyEURO() . ' EURO' : ''?></p>
+                        <p><?= ($block->getEndsProductValue() != NULL) ? 'Ends' : '123'?></p>
                         <?php if ($_product->isAvailable()) :?>
                             <?= $block->getProductDetailsHtml($_product) ?>
                         <?php endif; ?>

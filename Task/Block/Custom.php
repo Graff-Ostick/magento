@@ -52,4 +52,8 @@ class Custom extends \Magento\Catalog\Block\Product\ListProduct
         return $this->helper->getLabelCurrencyEURO();
     }
 
+    public function getEndsProductValue()
+    {
+        return $this->helper->getEndsForProduct();
+    }
 }
