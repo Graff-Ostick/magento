@@ -115,7 +115,7 @@ class ShowEnds extends Template
         $transportationCost = $this->helper->getTransportationCost();
 
         if($this->helper->getEnableTransportationCost() && $productWeight > $freePayWeight){
-            return "Air transportation price - " . ceil(($productWeight - $freePayWeight) / $payWeight) * $transportationCost;
+            return ceil(($productWeight - $freePayWeight) / $payWeight) * $transportationCost;
         }
         else {
             return null;

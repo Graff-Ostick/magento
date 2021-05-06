@@ -9,6 +9,8 @@ use Test\Task\Helper\CustomData;
 
 $text = $block->getOptionsQty();
 $transportCost =  $block->getTransportationPrice();
+$transportPrice = $transportCost ? "Air transportation price - " . $transportCost : null;
 
-echo $text . "<br>" . ($transportCost) ?: $transportCost;
+echo $text . "<br>" . $transportPrice;
+
 
