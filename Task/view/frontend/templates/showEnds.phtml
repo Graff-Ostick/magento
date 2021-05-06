@@ -1,7 +1,14 @@
 <?php
 /**
- * @var \Test\Task\Block\ShowEnds $block
- * @var \Test\Task\Helper\Data $helper
+ * @var ShowEnds $block
+ * @var CustomData $helper
  */
+
+use Test\Task\Block\ShowEnds;
+use Test\Task\Helper\CustomData;
+
 $text = $block->getOptionsQty();
-echo $text;
+$transportCost =  $block->getTransportationPrice();
+
+echo $text . "<br>" . ($transportCost) ?: $transportCost;
+

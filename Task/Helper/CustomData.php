@@ -4,7 +4,7 @@ namespace Test\Task\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 
-class Data extends AbstractHelper
+class CustomData extends AbstractHelper
 {
     const TASK_ENABLED_UAH    = 'task/general/enable_uah';
     const TASK_CURRENCY_UAH   = 'task/general/currency_uah';
@@ -15,6 +15,11 @@ class Data extends AbstractHelper
 
     const SHOW_ENDS_ENABLE = 'task/ends/enable_second_task';
     const SHOW_ENDS_VALUE = 'task/ends/amount_product';
+
+    const TRANSPORTATION_ENABLE = 'task/price_transportation/enable_price_transportation';
+    const FREE_WEIGHT = 'task/price_transportation/free_weight';
+    const PAY_WEIGHT = 'task/price_transportation/pay_weight';
+    const TRANSPORTATION_COST = 'task/price_transportation/transportation_cost';
 
     public function __construct(
         \Magento\Framework\App\Helper\Context $context
@@ -98,4 +103,39 @@ class Data extends AbstractHelper
 
         return $ends;
     }
+
+    public function getEnableTransportationCost(){
+        return $this->scopeConfig->getValue(
+            self::TRANSPORTATION_ENABLE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+    }
+
+    public function getFreePayWeight(){
+
+         return $this->scopeConfig->getValue(
+            self::FREE_WEIGHT,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+    }
+
+    public function getPayWeight(){
+
+        return $this->scopeConfig->getValue(
+            self::PAY_WEIGHT,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getTransportationCost(){
+
+        return $this->scopeConfig->getValue(
+            self::TRANSPORTATION_COST,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+
 }
