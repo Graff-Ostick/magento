@@ -2,18 +2,22 @@
 
 namespace Test\CronHelper\Cron;
 
+use Psr\Log\LoggerInterface;
+
 class Test
 {
+    protected $logger;
 
-    public function execute()
-    {
+    public function __construct(LoggerInterface $logger) {
+        $this->logger = $logger;
+    }
 
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/cron.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info(__METHOD__);
-
-        return $this;
-
+    /**
+     * Write to system.log
+     *
+     * @return void
+     */
+    public function execute() {
+        $this->logger->info('Cron Works');
     }
 }
