@@ -71,7 +71,8 @@ class CategoryList implements ArrayInterface
         $catagoryList = array();
         foreach ($categories as $category)
         {
-            $catagoryList[$category->getEntityId()] = __($this->_getParentName($category->getPath()) . $category->getName());
+            $categoryId = ' (' . $category->getId() . ')';
+            $catagoryList[$category->getEntityId()] = __($this->_getParentName($category->getPath()) . $category->getName()) . $categoryId;
         }
 
         return $catagoryList;
@@ -94,7 +95,7 @@ class CategoryList implements ArrayInterface
                 {
                     $category = $this->_categoryFactory->create()->load($catId);
                     $categoryName = $category->getName();
-                    $parentName .= $categoryName . ' -> ';
+                    $parentName .= $categoryName . ' -> ' ;
                 }
             }
         }
