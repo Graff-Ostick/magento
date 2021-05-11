@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceShemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Test_Quest::css/custom.css" />
+    </head>
+    <body>
+        <referenceContainer name="product.info.main">
+        <block
+                name="test_quest_end_of_sales"
+                class="Test\Quest\Block\Product\EndOfSales"
+                template="Test_Quest::endOfSales.phtml"
+                before="product.info.price"/>
+        </referenceContainer>
+    </body>
+</page>
