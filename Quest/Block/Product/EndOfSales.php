@@ -13,6 +13,7 @@ use Magento\Framework\View\Element\Template;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
 use Test\Quest\Helper\CustomData;
 
+
 class EndOfSales extends Template
 {
     /**
@@ -78,7 +79,22 @@ class EndOfSales extends Template
         return $this->product;
     }
 
-    public function getEndOfSales(){
-        return $this->helper->getEndOfSales();
+    public function getEndOfSales(): ?array
+    {
+        $dateTimeNow = (new \DateTime("now"))->format("y-m-d  H:i:s");
+        $endOfSales = $this->helper->getDateEndOfSales();
+        $isActual = strtotime($endOfSales) - strtotime($dateTimeNow);
+        $enabledCategoryId = $this->helper->getEnabledCategory();
+        $productCategoryId = strval($this->getProduct()->getCategoryIds()[0]);
+        $timeLeft = strval(intdiv($isActual,86400)) . ' day(s) '
+            . strval(intdiv(bcmod($isActual,86400), 3600)) . ' hour(s) '
+            . strval(bcmod(bcmod(bcmod($isActual,86400), 3600), 60)) . ' minute(s) ' ;
+        if (strstr($enabledCategoryId, $productCategoryId) and $isActual < 864000 and $isActual > 0){
+            return array($endOfSales, $timeLeft);
+        }
+        else{
+            return null;
+        }
+
     }
 }

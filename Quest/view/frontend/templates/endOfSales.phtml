@@ -8,6 +8,9 @@ use Test\Quest\Block\Product\EndOfSales;
 ?>
 
 <div class="custom_div">
-    <?= $block->getEndOfSales(); ?>
+    <?php $block->getEndOfSales()!=null ? $text = 'end of sales - ' . $block->getEndOfSales()[0]
+        . ",</br> time left - " . $block->getEndOfSales()[1] : $text='';
+        echo $text;
+    ?>
 </div>
 <div class="clearfix"></div>

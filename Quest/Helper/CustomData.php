@@ -44,7 +44,7 @@ class CustomData extends AbstractHelper
         }
     }
 
-    public function getEndOfSales(){
+    public function getDateEndOfSales(){
         if ($this->getEnabledModule()){
             return $this->scopeConfig->getValue(
                 self::QUEST_END_OF_SALES,
