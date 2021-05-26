@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job instance="Test\Quest\Cron\Discount" method="execute" name="test_quest_discount_enable">
+            <schedule>*/10 8 * * *</schedule>
+        </job>
+        <job instance="Test\Quest\Cron\Discount" method="execute" name="test_quest_discount_enable">
+            <schedule>*/10 10 * * *</schedule>
+        </job>
+    </group>
+</config>

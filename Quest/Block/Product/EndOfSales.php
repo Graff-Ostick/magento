@@ -7,15 +7,16 @@ use Magento\CatalogInventory\Api\StockStateInterface;
 use Magento\CatalogInventory\Model\Stock\StockItemRepository;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
 use Test\Quest\Helper\CustomData;
 
 
+
 class EndOfSales extends Template
 {
+    public $enableTime = true;
     /**
      * @var Registry
      */
@@ -52,6 +53,7 @@ class EndOfSales extends Template
         StockItemRepository $stockItemRepository,
         CustomData $helper,
         Configurable $configurableProduct,
+        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone,
         array $data
     ) {
         $this->registry = $registry;
@@ -60,6 +62,7 @@ class EndOfSales extends Template
         $this->_stockItemRepository = $stockItemRepository;
         $this->helper = $helper;
         $this->Configurable = $configurableProduct;
+        $this->timezone = $timezone;
         parent::__construct($context, $data);
     }
 
@@ -97,4 +100,22 @@ class EndOfSales extends Template
         }
 
     }
+
+    public function getPriceWithDiscount(){
+        $product = $this->getProduct();
+        $productPrice = $product->getFinalPrice();
+        $enabledDiscount = $this->helper->getEnabledDiscount();
+        $enableTime=$this->enableTime;
+        if($enabledDiscount and $enableTime){
+            return $productPrice * 0.9;
+        }
+        else{
+            return null;
+        }
+    }
+
+    public function getEnabledTime(){
+        return  $this->helper->getEnabledTime();
+    }
+
 }

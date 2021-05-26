@@ -10,7 +10,7 @@
             <tab>quest</tab>
             <resource>Test_Task::task_menu</resource>
 
-            <group id="first_quest" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="first_sub_quest" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Data product after name</label>
                 <field id="enable_module" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Show Data</label>
@@ -25,6 +25,17 @@
                     <frontend_model>Test\Quest\Block\Adminhtml\System\Config\Date</frontend_model>
                 </field>
 
+            </group>
+
+            <group id="second_sub_quest" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Discount from 8 to 10 am </label>
+                <field id="enabled_discount" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Discount</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="enabled_disabled_time" showInStore="0" showInWebsite="0" showInDefault="0" type="select">
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
             </group>
         </section>
     </system>
