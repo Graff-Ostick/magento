@@ -81,18 +81,21 @@ class EndOfSales extends Template
 
         return $this->product;
     }
-
+    public function isProductInCategories(){
+        $enabledCategoryId = $this->helper->getEnabledCategory();
+        $productCategoryId = strval($this->getProduct()->getCategoryIds()[0]);
+        return strstr($enabledCategoryId, $productCategoryId);
+    }
     public function getEndOfSales(): ?array
     {
         $dateTimeNow = (new \DateTime("now"))->format("y-m-d  H:i:s");
         $endOfSales = $this->helper->getDateEndOfSales();
         $isActual = strtotime($endOfSales) - strtotime($dateTimeNow);
-        $enabledCategoryId = $this->helper->getEnabledCategory();
-        $productCategoryId = strval($this->getProduct()->getCategoryIds()[0]);
+        $isAllowCategory = $this->isProductInCategories();
         $timeLeft = strval(intdiv($isActual,86400)) . ' day(s) '
             . strval(intdiv(bcmod($isActual,86400), 3600)) . ' hour(s) '
             . strval(bcmod(bcmod(bcmod($isActual,86400), 3600), 60)) . ' minute(s) ' ;
-        if (strstr($enabledCategoryId, $productCategoryId) and $isActual < 864000 and $isActual > 0){
+        if ( $isAllowCategory and $isActual < 864000 and $isActual > 0){
             return array($endOfSales, $timeLeft);
         }
         else{
@@ -102,11 +105,12 @@ class EndOfSales extends Template
     }
 
     public function getPriceWithDiscount(){
+        $isAllowCategory = $this->isProductInCategories();
         $product = $this->getProduct();
         $productPrice = $product->getFinalPrice();
         $enabledDiscount = $this->helper->getEnabledDiscount();
         $enableTime=$this->enableTime;
-        if($enabledDiscount and $enableTime){
+        if($enabledDiscount and $enableTime and $isAllowCategory){
             return $productPrice * 0.9;
         }
         else{

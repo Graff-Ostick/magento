@@ -28,7 +28,7 @@ class Discount
 
     public function execute(){
         $hourNow = intval(date('H'));
-        if ($hourNow>=8 && $hourNow<=11){
+        if ($hourNow>=6 && $hourNow<=11){
             $this->_configWriter->save('quest/second_sub_quest/enabled_disabled_time', true);
         }
         else{
