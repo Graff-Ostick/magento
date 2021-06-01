@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Quest\Block\product;
+namespace Test\Quest\Block\Product;
 
 use Magento\Catalog\Model\Product;
 use Magento\CatalogInventory\Api\StockStateInterface;
@@ -8,6 +8,7 @@ use Magento\CatalogInventory\Model\Stock\StockItemRepository;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
 use Test\Quest\Helper\CustomData;
@@ -53,7 +54,7 @@ class EndOfSales extends Template
         StockItemRepository $stockItemRepository,
         CustomData $helper,
         Configurable $configurableProduct,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone,
+        TimezoneInterface $timezone,
         array $data
     ) {
         $this->registry = $registry;
@@ -120,6 +121,15 @@ class EndOfSales extends Template
 
     public function getEnabledTime(){
         return  $this->helper->getEnabledTime();
+    }
+
+    public function changeProductPrice(){
+        if ($this->getPriceWithDiscount()){
+            return $this->getProduct()->setFinalPrice($this->getPriceWithDiscount());
+        }
+        else {
+            return null;
+        }
     }
 
 }

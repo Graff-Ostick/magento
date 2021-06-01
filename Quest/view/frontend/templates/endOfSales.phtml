@@ -20,6 +20,7 @@ use Test\Quest\Block\Product\EndOfSales;
                 'Price with discount - ' . strval($block->getPriceWithDiscount())
             : $discountText = '';
         echo $discountText;
+    $block->changeProductPrice();
     ?>
 </div>
 <div class="clearfix"></div>
