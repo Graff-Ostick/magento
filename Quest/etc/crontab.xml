@@ -5,9 +5,6 @@
             <schedule>*/10 8 * * *</schedule>
         </job>
         <job instance="Test\Quest\Cron\Discount" method="execute" name="test_quest_discount_enable">
-            <schedule>*/1 * * * *</schedule>
-        </job>
-        <job instance="Test\Quest\Cron\Discount" method="execute" name="test_quest_discount_enable">
             <schedule>*/10 10 * * *</schedule>
         </job>
     </group>
