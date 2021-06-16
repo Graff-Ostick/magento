@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.products.list" remove="true"/>
+        <referenceBlock name="category.products"
+                        class="Test\Task\Block\Custom"
+                        template="Test_Task::product/list.phtml"/>
+    </body>
+</page>

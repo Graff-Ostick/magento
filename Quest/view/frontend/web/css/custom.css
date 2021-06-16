@@ -1,0 +1,7 @@
+.custom-div{
+    float: left;
+}
+
+.clearfix:after {
+    clear: both;
+}

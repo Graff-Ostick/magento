@@ -1,0 +1,16 @@
+<?php
+/**
+ * @var ShowEnds $block
+ * @var CustomData $helper
+ */
+
+use Test\Task\Block\ShowEnds;
+use Test\Task\Helper\CustomData;
+
+$text = $block->getOptionsQty();
+$transportCost =  $block->getTransportationPrice();
+$transportPrice = $transportCost ? "Air transportation price - " . $transportCost : null;
+
+echo $text . "<br>" . $transportPrice;
+
+

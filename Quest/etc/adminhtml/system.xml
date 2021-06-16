@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="quest" translate="label" sortOrder="15">
+            <label>Quest</label>
+        </tab>
+
+        <section id="quest" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="8" translate="label">
+            <label>Quest</label>
+            <tab>quest</tab>
+            <resource>Test_Task::task_menu</resource>
+
+            <group id="first_sub_quest" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Data product after name</label>
+                <field id="enable_module" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Data</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="list_category" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Category</label>
+                    <source_model>Test\Quest\Model\CategoryList</source_model>
+                </field>
+                <field id="end_of_sales" translate="label" type="date" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>My Date Field</label>
+                    <frontend_model>Test\Quest\Block\Adminhtml\System\Config\Date</frontend_model>
+                </field>
+
+            </group>
+
+            <group id="second_sub_quest" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Discount from 8 to 10 am </label>
+                <field id="enabled_discount" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Discount</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="enabled_disabled_time" showInStore="0" showInWebsite="0" showInDefault="0" type="select">
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

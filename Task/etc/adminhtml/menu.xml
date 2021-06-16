@@ -1,0 +1,26 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Test_Task::menu"
+             title="Task Page"
+             translate="title"
+             module="Test_Task"
+             sortOrder="15"
+             resource="Test_Task::menu"/>
+        <add id="Test_Task::task1"
+             title="First Task"
+             module="Test_Task"
+             sortOrder="10"
+             parent="Test_Task::menu"
+             action="adminhtml/system_config/edit/section/task"
+             resource="Test_Task::task1"
+        />
+        <add id="Test_Task::task2"
+             title="Second Task"
+             module="Test_Task"
+             sortOrder="20"
+             parent="Test_Task::menu"
+             action="adminhtml/system_config/edit/section/task"
+             resource="Test_Task::task2"
+        />
+    </menu>
+</config>

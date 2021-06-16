@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Test_ObsPlug::obsplug_stores" title="Test Obs" sortOrder="10" >
+                        <resource id="Test_ObsPlug::test" title="Test" sortOrder="10"/>
+                        <resource id="Test_ObsPlug::settings" title="Settings" sortOrder="20"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

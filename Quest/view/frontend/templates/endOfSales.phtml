@@ -1,0 +1,27 @@
+<?php
+
+use Test\Quest\Block\Product\EndOfSales;
+
+/**
+ * @var EndOfSales $block
+ */
+?>
+
+<div class="custom-div">
+    <?php $block->getEndOfSales()!=null ? $text = 'end of sales - ' . $block->getEndOfSales()[0]
+        . ",</br> time left - " . $block->getEndOfSales()[1] : $text='';
+        echo $text;
+    ?>
+</div>
+
+<div class="custom-div">
+    <?php ($block->getPriceWithDiscount() && $block->getEnabledTime())
+            ? $discountText = 'from 8 am to 10 am discount 10% '. "<br>" .
+                'Price with discount - ' . strval($block->getPriceWithDiscount())
+            : $discountText = '';
+        echo $discountText;
+    $block->changeProductPrice();
+    ?>
+</div>
+<div class="clearfix"></div>
+

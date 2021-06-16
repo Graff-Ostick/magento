@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceShemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block
+                name="test_task_show_ends"
+                class="Test\Task\Block\ShowEnds"
+                template="Test_Task::showEnds.phtml"
+                before="product.price.tier"/>
+        </referenceContainer>
+    </body>
+</page>

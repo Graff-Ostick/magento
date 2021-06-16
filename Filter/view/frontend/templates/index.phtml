@@ -1,0 +1,9 @@
+<?php
+/** @var Test\Filter\Block\Index $block */
+
+$productCollection = $block->getProductCollection();
+foreach ($productCollection as $product) {
+    echo $product['sku'] . " --- " . $product['Name']." --- ". $product['Price'];
+    echo "<br>";
+}
+

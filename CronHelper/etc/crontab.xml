@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job instance="Test\CronHelper\Cron\Test" method="execute" name="test_cron">
+            <schedule>6 8 * * *</schedule>
+        </job>
+    </group>
+</config>

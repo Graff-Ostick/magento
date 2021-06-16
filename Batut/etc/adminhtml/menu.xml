@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Test_Batut::batut" title="Hello World" module="Test_Batut" sortOrder="51" resource="Test_Batut::test"/>
+        <add id="Test_Batut::post"
+             title="Manage Posts"
+             module="Test_Batut"
+             action="test_batut/post"
+             sortOrder="10"
+             resource="Test_Batut::post"
+             parent="Test_Batut::batut"/>
+
+        <add id="Test_Batut::batut_configuration"
+             title="Configuration batut"
+             module="Test_Batut"
+             sortOrder="99"
+             parent="Test_Batut::batut"
+             action="adminhtml/system_config/edit/section/helloworld"
+             resource="Test_Batut::batut_configuration"/>
+    </menu>
+</config>
