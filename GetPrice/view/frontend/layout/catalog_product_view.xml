@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceShemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block
+                name="test_show_price"
+                class="Test\GetPrice\Block\Product\ShowPrice"
+                template="Test_GetPrice::showPrice.phtml"
+                before="product.price.tier"/>
+        </referenceContainer>
+    </body>
+</page>

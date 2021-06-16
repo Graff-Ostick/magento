@@ -1,0 +1,17 @@
+<?php
+/** @var Test\GetPrice\Block\Product\ShowPrice $block */
+
+
+echo 'base price - '. $block->showBasePrice() ."<br>";
+echo 'final price - '. $block->showFinalPrice() ."<br>";
+echo 'special price - '. $block->showSpecialPrice() ."<br>";
+echo 'tier price - ';
+if ($block->showTierPrice()){
+    foreach ($block->showTierPrice() as $item){
+        echo $item['price'];
+    }
+}
+echo "<br>";
+if ($block->showCatalogPrice()){
+    echo 'price rule catalog - '. $block->showFinalPrice();
+}

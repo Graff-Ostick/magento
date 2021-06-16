@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="get_price" translate="label" sortOrder="2">
+            <label>ShowPrice</label>
+        </tab>
+
+        <section id="get_price" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="5" translate="label">
+            <label>Show price </label>
+            <tab>get_price</tab>
+            <resource>Test_GetPrice::getPrice_menu</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Show Price</label>
+                <field id="enable_module" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="show_base_price" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show vase price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Test\GetPrice\Block\System\Config\Disable</frontend_model>
+                </field>
+                <field id="show_final_price" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show final price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Test\GetPrice\Block\System\Config\Disable</frontend_model>
+                </field>
+                <field id="show_special_price" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show special price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Test\GetPrice\Block\System\Config\Disable</frontend_model>
+                </field>
+                <field id="show_tier_price" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show tier price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Test\GetPrice\Block\System\Config\Disable</frontend_model>
+                </field>
+                <field id="show_catalog_price" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>show catalog rule price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Test\GetPrice\Block\System\Config\Disable</frontend_model>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>
