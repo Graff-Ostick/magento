@@ -2,11 +2,9 @@
 
 /** @var Test\Countdown\Block\Product\CountDown $block */
 
-
 ?>
 
-<div data-mage-init='{"hello": {"message": "HELLO WORLD!"}}'></div>
-<?php if ($block->timeEnd() != null): ?>
+<?php if ($block->getFirstEndTime() != null): ?>
 <div id="getting-started"></div>
     <script type="text/javascript">
         require([
@@ -16,7 +14,7 @@
             $, countdown
         ) {
             jQuery("#getting-started")
-                .countdown("<?= $block->timeEnd()?>", function(event) {
+                .countdown("<?= $block->getFirstEndTime()?>", function(event) {
                     jQuery(this).text(
                         event.strftime('%D day`s %H hour`s %M minute`s %S second`s')
                     );
