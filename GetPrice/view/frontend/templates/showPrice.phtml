@@ -2,16 +2,22 @@
 /** @var Test\GetPrice\Block\Product\ShowPrice $block */
 
 
-echo 'base price - '. $block->showBasePrice() ."<br>";
-echo 'final price - '. $block->showFinalPrice() ."<br>";
-echo 'special price - '. $block->showSpecialPrice() ."<br>";
-echo 'tier price - ';
-if ($block->showTierPrice()){
+if($block->showBasePrice()!=null){
+    echo 'base price - '. $block->showBasePrice() ."<br>";
+}
+if ($block->showFinalPrice()!=null){
+    echo 'final price - '. $block->showFinalPrice() ."<br>";
+}
+if ($block->showSpecialPrice()!=null){
+    echo 'special price - '. $block->showSpecialPrice() ."<br>";
+}
+if ($block->showTierPrice()!=null){
+    echo 'tier price - ';
     foreach ($block->showTierPrice() as $item){
         echo $item['price'];
     }
+    echo "<br>";
 }
-echo "<br>";
-if ($block->showCatalogPrice()){
+if ($block->showCatalogPrice()!=null){
     echo 'price rule catalog - '. $block->showFinalPrice();
 }

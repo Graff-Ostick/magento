@@ -112,7 +112,7 @@ class ShowPrice extends Template
      * @return float
      * @throws LocalizedException
      */
-    public function showBasePrice(): float
+    public function showBasePrice()
     {
         if ($this->helper->showBasePrice()) {
             return (float)$this->getProduct()->getPrice();
@@ -123,7 +123,7 @@ class ShowPrice extends Template
      * @return float
      * @throws LocalizedException
      */
-    public function showFinalPrice(): float
+    public function showFinalPrice()
     {
         if ($this->helper->showFinalPrice()) {
             return (float)$this->getProduct()->getFinalPrice();
@@ -134,7 +134,7 @@ class ShowPrice extends Template
      * @return float
      * @throws LocalizedException
      */
-    public function showSpecialPrice(): float
+    public function showSpecialPrice()
     {
         if ($this->helper->showSpecialPrice()) {
             return (float)$this->getProduct()->getSpecialPrice();
@@ -157,7 +157,7 @@ class ShowPrice extends Template
      * @return mixed
      * @throws LocalizedException
      */
-    public function showCatalogPrice(): bool
+    public function showCatalogPrice()
     {
         if ($this->helper->showCatalogPrice()) {
             $productId = $this->getProduct()->getId();
@@ -180,5 +180,7 @@ class ShowPrice extends Template
 
         return Group::NOT_LOGGED_IN_ID;
     }
+
+
 }
 
