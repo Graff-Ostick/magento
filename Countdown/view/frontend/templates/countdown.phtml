@@ -22,3 +22,10 @@
         });
     </script>
 <?php endif; ?>
+
+<br>
+
+<?php
+foreach ($block->getTests() as $item){
+    echo $item[0] . ' - ' . $item[1] . '<br>';
+}

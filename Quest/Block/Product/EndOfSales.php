@@ -82,6 +82,7 @@ class EndOfSales extends Template
 
         return $this->product;
     }
+
     public function isProductInCategories(){
         $enabledCategoryId = $this->helper->getEnabledCategory();
         $productCategoryId = strval($this->getProduct()->getCategoryIds()[0]);

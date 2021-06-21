@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Test\Countdown\Block\Product;
 
+use Exception;
 use Magento\Catalog\Model\Product;
 use Magento\CatalogRule\Model\ResourceModel\Rule;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
@@ -13,10 +14,17 @@ use Magento\Framework\View\Element\Template;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
 use Magento\Store\Model\StoreManagerInterface;
 use Test\Quest\Helper\CustomData;
+use Psr\Log\LoggerInterface;
+use Magento\SalesRule\Api\Data\RuleInterface;
+use Magento\CatalogRule\Api\CatalogRuleRepositoryInterface;
 
 class CountDown extends Template
 {
 
+    /**
+     * @var CatalogRuleRepositoryInterface
+     */
+    private $catalogRuleRepository;
     /**
      * @var Registry
      */
@@ -45,6 +53,8 @@ class CountDown extends Template
         Template\Context $context,
         Registry $registry,
         StoreManagerInterface $storeManager,
+        LoggerInterface $logger,
+        CatalogRuleRepositoryInterface $catalogRuleRepository,
         array $data
     )
     {
@@ -53,6 +63,8 @@ class CountDown extends Template
         $this->timezone = $timezone;
         $this->storeManager = $storeManager;
         $this->rule = $rule;
+        $this->catalogRuleRepository = $catalogRuleRepository;
+        $this->logger = $logger;
     }
 
     /**
@@ -82,7 +94,7 @@ class CountDown extends Template
         $specialPrice =  $this->getProduct()->getSpecialToDate();
         $timeNow = strtotime(date('Y-m-d h:m:s'));
         if (strtotime($specialPrice)>$timeNow){
-            return [$specialPrice];
+            return $specialPrice;
         }
         else{
             return null;
@@ -95,20 +107,60 @@ class CountDown extends Template
         $websiteId = $this->storeManager->getStore()->getWebsiteId();
         $customerGroupId = $this->getCustomerGroupId();
         $rules = $this->rule->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
-        $firstTimeEnd = $rules[0]['to_time'];
+        if ($rules != null){
+            $firstTimeEnd = $rules[0]['to_time'];
 
-        foreach ($rules as $rule){
-            if ((int)$rule['to_time']<(int)$firstTimeEnd){
-                $firstTimeEnd = $rule['to_time'];
+            foreach ($rules as $rule){
+                if ((int)$rule['to_time']<(int)$firstTimeEnd){
+                    $firstTimeEnd = $rule['to_time'];
+                }
             }
-        }
 
-        return [gmdate('Y-m-d h:m:s', (int)$firstTimeEnd)];
+            return gmdate('Y-m-d h:m:s', (int)$firstTimeEnd);
+        }
+        else {
+            return null;
+        }
     }
 
     public function getFirstEndTime(){
         $catalogTime = $this->timeEndCatalogPrice();
         $specialTime = $this->timeEndSpecialPrice();
-        return min($catalogTime, $specialTime);
+        if ($catalogTime!=null && $specialTime!=null){
+            return min($catalogTime, $specialTime);
+        }
+        elseif ($specialTime!=null){
+            return $specialTime;
+        }
+        else{
+            return $catalogTime;
+        }
+    }
+
+    public function getTests(){
+        $specialPrice = ['special price ', $this->getProduct()->getSpecialToDate()];
+        $productId = $this->getProduct()->getId();
+        $date = $this->timezone->date()->getTimestamp();
+        $websiteId = $this->storeManager->getStore()->getWebsiteId();
+        $customerGroupId = $this->getCustomerGroupId();
+        $rules = $this->rule->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
+        $allTime = [];
+        $allTime[0] = $specialPrice;
+        foreach ($rules as $rule){
+            array_push($allTime, [$this->getRuleNameById($rule['rule_id']),gmdate('Y-m-d h:m:s', (int)$rule['to_time'])]);
+        }
+
+        return $allTime;
+    }
+
+    public function getRuleNameById($ruleId){
+        try {
+            $rule = $this->catalogRuleRepository->get($ruleId)->getName();
+        } catch (NoSuchEntityException $exception) {
+            $this->logger($exception->getMessage());
+            $rule = null;
+        }
+
+        return $rule;
     }
 }
