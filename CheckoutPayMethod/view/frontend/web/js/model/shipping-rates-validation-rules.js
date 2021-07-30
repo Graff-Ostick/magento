@@ -13,7 +13,10 @@ define(
                     },
                     'city': {
                         'required': true
-                    }
+                    }/*,
+                    'street.1': {
+                        'required': true
+                    }*/
                 };
             }
         };
