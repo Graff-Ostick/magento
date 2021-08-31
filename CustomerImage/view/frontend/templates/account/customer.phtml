@@ -1,0 +1,10 @@
+<?php /** @var \Test\CustomerImage\Block\Customer\Account $block */ ?>
+<?php
+
+if ($block->customerLoggedIn()){
+$filePath = $block->getFileUrl();
+$arr = $block->getPictureSize(); ?>
+    <img src='<?= $filePath ?>' height="<?= $arr[1]?>" width="<?= $arr[0]?>" />
+    <?php
+}
+?>

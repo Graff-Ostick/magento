@@ -1,0 +1,15 @@
+<fieldset class="fieldset create account" data-hasrequired="<?= ('* Required Fields') ?>">
+    <legend class="legend">
+        <span>
+        <?= __('Additional Information') ?>
+        </span>
+    </legend>
+    <p>
+    <div class="field customer_image ">
+        <label for="customer_image" class="label"><span><?= __('Customer Image') ?></span></label>
+        <div class="control">
+            <input type="file" name="customer_image" id="customer_image" title="<?= __('Customer Image') ?>"
+                   class="input-text" data-validate="{required:false}">
+        </div>
+    </div>
+</fieldset>
