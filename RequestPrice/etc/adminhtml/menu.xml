@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Test_RequestPrice::customers_support_information"
+             title="Request Price "
+             translate="title"
+             module="Test_RequestPrice"
+             sortOrder="50"
+             parent="Magento_Customer::customer"
+             resource="Test_RequestPrice::customers_support_information" />
+
+        <add id="Test_RequestPrice::menu"
+             title="Request Price "
+             module="Test_RequestPrice"
+             sortOrder="100"
+             parent="Test_RequestPrice::customers_support_information"
+             action="adminpage/requestprice"
+             resource="Test_RequestPrice::menu"/>
+
+    </menu>
+</config>

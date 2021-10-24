@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Test_RequestPrice::js/popup.js"/>
+    </head>
+    <body>
+        <referenceContainer name="product.info.main">
+            <block
+                name="test_request"
+                template="Test_RequestPrice::product/view/request_price_button.phtml"
+                class="Test\RequestPrice\Block\Product\RequestPrice"
+                before="product.info.price"/>
+        </referenceContainer>
+    </body>
+</page>
