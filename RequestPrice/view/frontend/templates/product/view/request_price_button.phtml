@@ -38,9 +38,7 @@
         </form>
     </div>
 </div>
-<input type="hidden" id="url" value="<?php echo $block->getUrl('request_price/index/save'); ?>"/>
-<input type="hidden" id="sku" value="<?php echo $block->getProduct()->getSku(); ?>"/>
-<input type="hidden" id="created_at" value="<?php echo $block->getDate(); ?>"/>
+
 <!--
 <script>
     require(['jquery', 'Test_RequestPrice/js/popup'],
@@ -75,12 +73,7 @@
                     text: $.mage.__('Close'),
                     class: 'modal-close',
                     click: this.closeModal,
-                },
-                    {
-                        text: $.mage.__('Submit'),
-                        class: 'modal-close',
-                        click: onsubmit
-                    }
+                }
                 ]
             };
 
@@ -100,6 +93,10 @@
                 });
             }
 
+            $("#submit_rq_price").on('click',function(){
+                onsubmit();
+
+            });
 
             modal(options, $('#modal-content'));
             $("#price-request-btn").on('click',function(){
