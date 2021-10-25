@@ -9,7 +9,6 @@
              sortOrder="50"
              parent="Magento_Customer::customer"
              resource="Test_RequestPrice::customers_support_information" />
-
         <add id="Test_RequestPrice::menu"
              title="Request Price "
              module="Test_RequestPrice"
@@ -17,6 +16,5 @@
              parent="Test_RequestPrice::customers_support_information"
              action="adminpage/requestprice"
              resource="Test_RequestPrice::menu"/>
-
     </menu>
 </config>

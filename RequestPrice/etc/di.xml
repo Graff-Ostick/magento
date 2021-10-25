@@ -1,11 +1,10 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\Catalog\Pricing\Render\FinalPriceBox">
-        <plugin name="hide_price" type="Test\RequestPrice\Plugin\HidePrice"/>
-    </type>
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Test\RequestPrice\Api\Data\RequestPriceInterface" type="Test\RequestPrice\Model\RequestPrice"/>
 
-    <preference for="Test\RequestPrice\Api\Data\GridInterface" type="Test\RequestPrice\Model\RequestPrice" />
-
-    <virtualType name="Test\RequestPrice\Model\ResourceModel\RequestPrice\RequestPrice\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="Test\RequestPrice\Model\ResourceModel\RequestPrice\RequestPrice\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">request_price</argument>
             <argument name="resourceModel" xsi:type="string">Test\RequestPrice\Model\ResourceModel\RequestPrice</argument>
@@ -14,9 +13,14 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="requestprice_record_grid_list_data_source" xsi:type="string">Test\RequestPrice\Model\ResourceModel\RequestPrice\RequestPrice\Collection</item>
+                <item name="requestprice_record_grid_list_data_source" xsi:type="string">
+                    Test\RequestPrice\Model\ResourceModel\RequestPrice\RequestPrice\Collection
+                </item>
             </argument>
         </arguments>
+    </type>
+    <type name="Magento\Catalog\Pricing\Render\FinalPriceBox">
+        <plugin name="hide_price" type="Test\RequestPrice\Plugin\HidePrice"/>
     </type>
     <type name="Test\RequestPrice\Logger\Handler">
         <arguments>

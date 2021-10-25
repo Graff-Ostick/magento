@@ -1,22 +1,25 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Plugin;
 
-use Magento\Catalog\Pricing\Render\FinalPriceBox;
+use Magento\Catalog\Pricing\Render\FinalPriceBox as Subject;
 
+/**
+ * Hide price plugin.
+ */
 class HidePrice
 {
     /**
-     * @param FinalPriceBox $subject
-     * @param $result
+     * After to html.
+     *
+     * @param Subject $subject
+     * @param         $result
+     *
      * @return mixed|string
      */
-    function afterToHtml(FinalPriceBox $subject, $result)
+    function afterToHtml(Subject $subject, $result): string
     {
-        if ($subject) {
-            return '';
-        } else {
-            return $result;
-        }
+        return $subject ? '' : $result;
     }
 }

@@ -1,25 +1,24 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Controller\Adminhtml\RequestPrice;
 
 use Magento\Backend\App\Action;
-use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
 use Test\RequestPrice\Model\ResourceModel\RequestPrice\CollectionFactory;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 
-class MassDelete extends Action
+/**
+ * Mass delete action.
+ */
+class MassDelete extends Action implements HttpPostActionInterface
 {
-    /**
-     * Massactions filter.
-     * @var Filter
-     */
+    /** @var Filter */
     protected $_filter;
 
-    /**
-     * @var CollectionFactory
-     */
+    /** @var CollectionFactory */
     protected $_collectionFactory;
 
     /**
@@ -39,7 +38,7 @@ class MassDelete extends Action
     }
 
     /**
-     * @return Redirect
+     * @inheritDoc
      */
     public function execute()
     {
@@ -56,8 +55,7 @@ class MassDelete extends Action
     }
 
     /**
-     * Check Category Map recode delete Permission.
-     * @return bool
+     * @inheritDoc
      */
     protected function _isAllowed()
     {

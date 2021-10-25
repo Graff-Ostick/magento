@@ -1,49 +1,43 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use Test\RequestPrice\Api\Data\GridInterface;
+use Test\RequestPrice\Api\Data\RequestPriceInterface;
+use Test\RequestPrice\Model\ResourceModel\RequestPrice as RequestPriceResource;
 
-class RequestPrice extends AbstractModel implements GridInterface
+/**
+ * Request price model.
+ */
+class RequestPrice extends AbstractModel implements RequestPriceInterface
 {
-    /**
-     * CMS page cache tag.
-     */
     const CACHE_TAG = 'request_price';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $_cacheTag = 'request_price';
 
-    /**
-     * Prefix of model events names.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $_eventPrefix = 'request_price';
 
     /**
-     * Initialize resource model.
+     * @inheritDoc
      */
     public function _construct()
     {
-        $this->_init('Test\RequestPrice\Model\ResourceModel\RequestPrice');
+        $this->_init(RequestPriceResource::class);
     }
 
     /**
-     * Get Id.
-     *
-     * @return int
+     * @inheritDoc
      */
     public function getId()
     {
-        return $this->getData(self::ID);
+        return $this->_getData(self::ID);
     }
 
     /**
-     * Set Id.
+     * @inheritDoc
      */
     public function setId($id)
     {
@@ -51,111 +45,98 @@ class RequestPrice extends AbstractModel implements GridInterface
     }
 
     /**
-     * Get Name.
-     *
-     * @return varchar
+     * @inheritDoc
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->getData(self::NAME);
+        return $this->_getData(self::NAME);
     }
 
     /**
-     * Set Name.
+     * @inheritDoc
      */
-    public function setName($name)
+    public function setName(string $name): RequestPriceInterface
     {
         return $this->setData(self::NAME, $name);
     }
 
     /**
-     * Get Email.
-     *
-     * @return varchar
+     * @inheritDoc
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
-        return $this->getData(self::EMAIL);
+        return $this->_getData(self::EMAIL);
     }
 
     /**
-     * Set Email.
+     * @inheritDoc
      */
-    public function setEmail($email)
+    public function setEmail(string $email): RequestPriceInterface
     {
         return $this->setData(self::EMAIL, $email);
     }
 
     /**
-     * Get Comment.
-     *
-     * @return varchar
+     * @inheritDoc
      */
-    public function getComment()
+    public function getComment(): ?string
     {
-        return $this->getData(self::COMMENT);
+        return $this->_getData(self::COMMENT);
     }
 
     /**
-     * Set Comment.
+     * @inheritDoc
      */
-    public function setComment($comment)
+    public function setComment(string $comment): RequestPriceInterface
     {
         return $this->setData(self::COMMENT, $comment);
     }
 
     /**
-     * Get SKU.
-     *
-     * @return varchar
+     * @inheritDoc
      */
-    public function getSku()
+    public function getSku(): ?string
     {
-        return $this->getData(self::SKU);
+        return $this->_getData(self::SKU);
     }
 
     /**
-     * Set SKU.
+     * @inheritDoc
      */
-    public function setSku($sku)
+    public function setSku(string $sku): RequestPriceInterface
     {
         return $this->setData(self::SKU, $sku);
     }
 
     /**
-     * Get CreatedAt.
-     *
-     * @return varchar
+     * @inheritDoc
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
-        return $this->getData(self::CREATED_AT);
+        return $this->_getData(self::CREATED_AT);
     }
 
     /**
-     * Set CreatedAt.
+     * @inheritDoc
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(string $createdAt): RequestPriceInterface
     {
         return $this->setData(self::CREATED_AT, $createdAt);
     }
 
     /**
-     * Get Status.
-     *
-     * @return varchar
+     * @inheritDoc
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
-        return $this->getData(self::STATUS);
+        return $this->_getData(self::STATUS);
     }
 
     /**
-     * Set Status.
+     * @inheritDoc
      */
-    public function setStatus($status)
+    public function setStatus(string $status): RequestPriceInterface
     {
         return $this->setData(self::STATUS, $status);
     }
-
 }

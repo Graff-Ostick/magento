@@ -1,16 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Controller\Adminhtml\RequestPrice;
 
 use Magento\Backend\App\Action\Context;
 use Test\RequestPrice\Model\RequestPriceFactory;
+use Magento\Backend\App\Action;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 
-class Save extends \Magento\Backend\App\Action
+/**
+ * Save action.
+ */
+class Save extends Action implements HttpPostActionInterface
 {
-    /**
-     * @var RequestPriceFactory
-     */
-    var $gridFactory;
+    private const RESOURCE = 'Test_RequestPrice::save';
+
+    /** @var RequestPriceFactory */
+    private $gridFactory;
 
     /**
      * @param Context $context
@@ -25,15 +31,13 @@ class Save extends \Magento\Backend\App\Action
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @inheritDoc
      */
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
         if (!$data) {
-            $this->_redirect('adminpage/requestprice/addrow');
-            return;
+            return $this->_redirect('adminpage/requestprice/addrow');
         }
         try {
             $rowData = $this->gridFactory->create();
@@ -46,14 +50,15 @@ class Save extends \Magento\Backend\App\Action
         } catch (\Exception $e) {
             $this->messageManager->addError(__($e->getMessage()));
         }
-        $this->_redirect('adminpage/requestprice/index');
+
+        return $this->_redirect('adminpage/requestprice/index');
     }
 
     /**
-     * @return bool
+     * @inheritDoc
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Test_RequestPrice::save');
+        return $this->_authorization->isAllowed(self::RESOURCE);
     }
 }

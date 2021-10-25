@@ -4,14 +4,13 @@
  */
 ?>
 <div class="actions">
-    <button type="button" class="btn btn-primary btn-lg" id="price-request-btn" data-toggle="modal"
-            data-target="#modal-content">Request Price</button>
+    <button type="button" class="btn btn-primary btn-lg" id="price-request-btn">Request Price</button>
 </div>
 
 
 <div id="modal-content" >
     <div class="modal-inner-content">
-        <form class="form" id="custom-form" method="post" autocomplete="off">
+        <form class="form" id="custom-form" method="post" autocomplete="off" data-mage-init='{"validation":{}}'>
             <fieldset class="fieldset">
                 <div class="field required">
                     <label for="name" class="label"><span><?php echo __('Name') ?></span></label>
@@ -31,7 +30,7 @@
                         <input type="text" name="rp-comment" id="rp-comment" value="" title="<?php echo __('Comment') ?>" class="input-text" data-validate="{required:false}">
                     </div>
                 </div>
-                <button id="submit_rq_price" type="submit" title="Submit" class="action submit primary">
+                <button id="submit-rq-price" type="submit" title="Submit" class="action primary">
                     <span>Submit</span>
                 </button>
             </fieldset>
@@ -39,70 +38,14 @@
     </div>
 </div>
 
-<!--
-<script>
-    require(['jquery', 'Test_RequestPrice/js/popup'],
-        function ($) {
-           return;
+<script type="text/x-magento-init">
+{
+    "*": {
+        "requestPrice": {
+            "url":"<?php echo $block->getUrl('request_price/index/save'); ?>",
+            "sku":"<?php echo $block->getProduct()->getSku(); ?>",
+            "created":"<?php echo $block->getDate(); ?>"
         }
-    );
-</script>
--->
-
-<script>
-    require(
-
-        [
-            'jquery',
-            'Magento_Ui/js/modal/modal',
-        ],
-        function(
-            $,
-            modal
-        ) {
-            let url = "<?php echo $block->getUrl('request_price/index/save') ?>";
-            let sku = "<?php echo $block->getProduct()->getSku() ?>";
-            let created = "<?php echo $block->getDate(); ?>";
-
-            let options = {
-                type: 'popup',
-                responsive: true,
-                innerScroll: true,
-                title: 'Request the price',
-                buttons: [{
-                    text: $.mage.__('Close'),
-                    class: 'modal-close',
-                    click: this.closeModal,
-                }
-                ]
-            };
-
-            function onsubmit(){
-                jQuery.ajax({
-                    url: url,
-                    type: "POST",
-                    data: {
-                        name:$("#rp-name").val(),
-                        email:$("#rp-email").val(),
-                        comment:$("#rp-comment").val(),
-                        sku:sku,
-                        created_at:created,
-                        status: 'New'
-                    },
-                    showLoader: true,
-                });
-            }
-
-            $("#submit_rq_price").on('click',function(){
-                onsubmit();
-
-            });
-
-            modal(options, $('#modal-content'));
-            $("#price-request-btn").on('click',function(){
-                $("#modal-content").modal("openModal");
-
-            });
-        }
-    );
+    }
+}
 </script>

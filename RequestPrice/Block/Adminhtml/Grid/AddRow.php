@@ -1,23 +1,28 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Block\Adminhtml\Grid;
 
 use Magento\Backend\Block\Widget\Context;
+use Magento\Backend\Block\Widget\Form\Container;
 use Magento\Framework\Registry;
+use Magento\Framework\Phrase;
 
-class AddRow extends \Magento\Backend\Block\Widget\Form\Container
+/**
+ * ...
+ */
+class AddRow extends Container
 {
-    /**
-     * Core registry.
-     *
-     * @var Registry
-     */
-    protected $_coreRegistry = null;
+    private const RESOURCE = 'Test_RequestPrice::add_row';
+    private const FORM_ACTION_URL = 'form_action_url';
+
+    /** @var Registry */
+    protected $_coreRegistry;
 
     /**
-     * @param Context $context
-     * @param Registry           $registry
-     * @param array                                 $data
+     * @param Context  $context
+     * @param Registry $registry
+     * @param array    $data
      */
     public function __construct(
         Context $context,
@@ -29,15 +34,17 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
     }
 
     /**
-     * Initialize Imagegallery Images Edit Block.
+     * @inheritDoc
      */
     protected function _construct()
     {
         $this->_objectId = 'row_id';
         $this->_blockGroup = 'Test_RequestPrice';
         $this->_controller = 'adminhtml_grid';
+
         parent::_construct();
-        if ($this->_isAllowedAction('Test_RequestPrice::add_row')) {
+
+        if ($this->_isAllowedAction(self::RESOURCE)) {
             $this->buttonList->update('save', 'label', __('Save'));
         } else {
             $this->buttonList->remove('save');
@@ -48,9 +55,9 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
     /**
      * Retrieve text for header element depending on loaded image.
      *
-     * @return \Magento\Framework\Phrase
+     * @return Phrase
      */
-    public function getHeaderText()
+    public function getHeaderText(): Phrase
     {
         return __('Add RoW Data');
     }
@@ -62,7 +69,7 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
      *
      * @return bool
      */
-    protected function _isAllowedAction($resourceId)
+    protected function _isAllowedAction(string $resourceId): bool
     {
         return $this->_authorization->isAllowed($resourceId);
     }
@@ -72,12 +79,8 @@ class AddRow extends \Magento\Backend\Block\Widget\Form\Container
      *
      * @return string
      */
-    public function getFormActionUrl()
+    public function getFormActionUrl(): string
     {
-        if ($this->hasFormActionUrl()) {
-            return $this->getData('form_action_url');
-        }
-
-        return $this->getUrl('*/*/save');
+        return $this->_getData(self::FORM_ACTION_URL) ?? $this->getUrl('*/*/save');
     }
 }

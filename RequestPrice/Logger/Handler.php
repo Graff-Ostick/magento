@@ -1,22 +1,14 @@
 <?php
-
+declare(strict_types=1);
 namespace Test\RequestPrice\Logger;
 
 use Magento\Framework\Logger\Handler\Base;
 
 class Handler extends Base
 {
-    /**
-     * Logging level.
-     *
-     * @var int
-     */
+    /** @var int */
     public $loggerType = Logger::INFO;
 
-    /**
-     * File name.
-     *
-     * @var string
-     */
+    /** @var string */
     public $fileName = '/var/log/grid.log';
 }

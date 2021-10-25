@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="request_price" resource="default" engine="innodb">
+        <column xsi:type="int" name="id" nullable="false" padding="11" unsigned="true" identity="true"/>
+        <column xsi:type="varchar" length="128" name="name" nullable="true" comment="name"/>
+        <column xsi:type="varchar" length="128" name="email" nullable="true" comment="email"/>
+        <column xsi:type="varchar" length="32" name="sku" nullable="true" comment="sku"/>
+        <column xsi:type="varchar" length="16" name="status" nullable="false" default="new" comment="status"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="created_at"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="TEST_REQUEST_PRICE_EMAIL" indexType="btree">
+            <column name="email"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,19 @@
+{
+    "request_price": {
+        "column": {
+            "id": true,
+            "name": true,
+            "email": true,
+            "sku": true,
+            "status": true,
+            "created_at": true,
+            "test": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "REQUEST_PRICE_EMAIL": true
+        }
+    }
+}

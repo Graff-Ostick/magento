@@ -1,27 +1,25 @@
 <?php
+declare(strict_types=1);
+
 namespace Test\RequestPrice\Controller\Adminhtml\RequestPrice;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Index
+ * Index action.
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    const MENU_ID = 'Test_RequestPrice::menu';
+    private const RESOURCE = 'Test_RequestPrice::menu';
+    private const MENU_ID = 'Test_RequestPrice::menu';
 
-    /**
-     * @var PageFactory
-     */
+    /** @var PageFactory */
     protected $resultPageFactory;
 
     /**
-     * Index constructor.
-     *
      * @param Context $context
      * @param PageFactory $resultPageFactory
      */
@@ -34,23 +32,21 @@ class Index extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @return Page
+     * @inheritDoc
      */
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu(static::MENU_ID);
+        $resultPage->setActiveMenu(self::MENU_ID);
 
         return $resultPage;
     }
 
     /**
-     * Check Order Import Permission.
-     *
-     * @return bool
+     * @inheritDoc
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Test_RequestPrice::menu');
+        return $this->_authorization->isAllowed(self::RESOURCE);
     }
 }

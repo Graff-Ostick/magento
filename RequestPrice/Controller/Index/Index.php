@@ -1,14 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Controller\Index;
 
 use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\HttpGetActionInterface;
 
-class Index extends Action
+/**
+ * Index action.
+ */
+class Index extends Action implements HttpGetActionInterface
 {
     /**
-     * [execute description]
-     * @return [type] [description]
+     * @inheritDoc
      */
     public function execute()
     {

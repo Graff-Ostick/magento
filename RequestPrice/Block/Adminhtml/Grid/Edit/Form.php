@@ -1,59 +1,63 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Block\Adminhtml\Grid\Edit;
 
+use IntlDateFormatter;
 use Magento\Backend\Block\Template\Context;
 use Magento\Cms\Model\Wysiwyg\Config;
 use Magento\Framework\Data\FormFactory;
 use Magento\Framework\Registry;
-use Test\RequestPrice\Model\Status;
+use Magento\Backend\Block\Widget\Form\Generic;
+use Test\RequestPrice\Model\Options\Source\Status as StatusOptions;
 
 /**
  * Adminhtml Add New Row Form.
  */
-class Form extends \Magento\Backend\Block\Widget\Form\Generic
+class Form extends Generic
 {
-    /**
-     * @var \Magento\Store\Model\System\Store
-     */
-    protected $_systemStore;
+    /** @var Config */
+    private $_wysiwygConfig;
+
+    /** @var StatusOptions */
+    private $statusOptions;
 
     /**
-     * @param Context $context,
-     * @param Registry $registry,
-     * @param FormFactory $formFactory,
-     * @param Config $wysiwygConfig,
-     * @param Status $options,
+     * @param Context       $context
+     * @param Registry      $registry
+     * @param FormFactory   $formFactory
+     * @param Config        $wysiwygConfig
+     * @param StatusOptions $statusOptions
+     * @param array         $data
      */
     public function __construct(
         Context $context,
         Registry $registry,
         FormFactory $formFactory,
         Config $wysiwygConfig,
-        Status $options,
+        StatusOptions $statusOptions,
         array $data = []
     ) {
-        $this->_options = $options;
-        $this->_wysiwygConfig = $wysiwygConfig;
         parent::__construct($context, $registry, $formFactory, $data);
+        $this->_wysiwygConfig = $wysiwygConfig;
+        $this->statusOptions = $statusOptions;
     }
 
     /**
-     * Prepare form.
-     *
-     * @return $this
+     * @inheritDoc
      */
     protected function _prepareForm()
     {
-        $dateFormat = $this->_localeDate->getDateFormat(\IntlDateFormatter::SHORT);
+        $dateFormat = $this->_localeDate->getDateFormat(IntlDateFormatter::SHORT);
         $model = $this->_coreRegistry->registry('row_data');
         $form = $this->_formFactory->create(
-            ['data' => [
-                            'id' => 'edit_form',
-                            'enctype' => 'multipart/form-data',
-                            'action' => $this->getData('action'),
-                            'method' => 'post'
-                        ]
+            [
+                'data' => [
+                    'id' => 'edit_form',
+                    'enctype' => 'multipart/form-data',
+                    'action' => $this->getData('action'),
+                    'method' => 'post'
+                ]
             ]
         );
 
@@ -126,8 +130,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('Created At'),
                 'date_format' => $dateFormat,
                 'time_format' => 'H:mm:ss',
-                'class' => 'validate-date validate-date-range date-range-custom_theme-from',
-                'class' => 'required-entry',
+                'class' => 'validate-date validate-date-range date-range-custom_theme-from required-entry',
                 'style' => 'width:100px',
             ]
         );
@@ -139,7 +142,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('Status'),
                 'id' => 'status',
                 'title' => __('Status'),
-                'values' => $this->_options->getOptions(),
+                'values' => $this->statusOptions->toOptionArray(),
                 'class' => 'status',
                 'required' => true,
             ]

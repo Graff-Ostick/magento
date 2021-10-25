@@ -1,44 +1,24 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\RequestPrice\Model\ResourceModel;
-use Magento\Framework\Model\ResourceModel\Db\Context;
-use Magento\Framework\Stdlib\DateTime\DateTime;
+
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Test\RequestPrice\Api\Data\RequestPriceInterface;
 
 /**
- * RequestPrice RequestPrice mysql resource.
+ * Request price resource model.
  */
-class RequestPrice extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class RequestPrice extends AbstractDb
 {
-    /**
-     * @var string
-     */
-    protected $_idFieldName = 'id';
-    /**
-     * @var DateTime
-     */
-    protected $_date;
+    /** @inheritDoc */
+    protected $_idFieldName = RequestPriceInterface::ID;
 
     /**
-     * Construct.
-     *
-     * @param Context $context
-     * @param DateTime       $date
-     * @param string|null                                       $resourcePrefix
-     */
-    public function __construct(
-        Context $context,
-        DateTime $date,
-        $resourcePrefix = null
-    ) {
-        parent::__construct($context, $resourcePrefix);
-        $this->_date = $date;
-    }
-
-    /**
-     * Initialize resource model.
+     * @inheritDoc
      */
     public function _construct()
     {
-        $this->_init('request_price', 'id');
+        $this->_init(RequestPriceInterface::MAIN_TABLE, RequestPriceInterface::ID);
     }
 }
