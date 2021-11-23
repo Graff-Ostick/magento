@@ -6,6 +6,7 @@ namespace Test\RequestPrice\Api\Data;
  */
 interface RequestPriceInterface
 {
+
     public const MAIN_TABLE = 'request_price';
     public const ID = 'id';
     public const NAME = 'name';
