@@ -1,0 +1,23 @@
+
+<li id="step_code" data-bind="fadeVisible: isVisible">
+    <div id="checkout-step-title"
+         class="step-content"
+         data-role="content">
+        <p>By proceeding the checkout process you are accepting the additional terms and conditions</p>
+        <div id="checkbox-terms" data-bind="visible: show_checkbox()">
+            <input type="checkbox" id="terms-checkbox" checked="checked" />
+            <label>
+                <span id="terms-text" data-bind="i18n: 'Accept the privacy policy'"></span>
+            </label>
+        </div>
+        <form data-bind="submit: navigateToNextStep">
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button data-role="opc-continue" type="submit" class="button action continue primary">
+                        <span><!-- ko i18n: 'Next'--><!-- /ko --></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</li>

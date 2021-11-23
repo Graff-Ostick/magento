@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Test_Terms::css/termsUppercase.css" rel="stylesheet" type="text/css"  />
+    </head>
+    <referenceContainer name="header.panel">
+        <block class="Magento\Framework\View\Element\Template" name="header.terms" template="Test_Terms::terms.phtml"/>
+    </referenceContainer>
+    <referenceContainer name="footer">
+        <container htmlTag="div" htmlClass="text-uppercase">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="footer.terms"
+                   template="Test_Terms::terms.phtml"/>
+        </container>
+    </referenceContainer>
+
+</page>
